@@ -21,15 +21,15 @@ support :
 
 ![image](https://user-images.githubusercontent.com/29995264/133375816-3558c62f-65f7-40ad-87b0-e404c91787a3.png)
 
-(각 구매자가 구입한 물품조합을 저장한다.)
+- 각 구매자가 구입한 물품조합을 저장한다.
 
 ![image](https://user-images.githubusercontent.com/29995264/133375893-dc1c396c-6b26-4519-9aee-e31d82dfc134.png)
 
-(분석된 조합의 확인 각 조합의 종류와 구매량을 표시하였다.)
+- 분석된 조합의 확인 각 조합의 종류와 구매량을 표시하였다.
 
 ![image](https://user-images.githubusercontent.com/29995264/133376381-9da78533-497d-4351-a25f-0980ef3cda85.png)
 
-(결과로는 유효한 조합들만을 저장하여 support 값과 함께 출력해준다.)
+- 결과로는 유효한 조합들만을 저장하여 support 값과 함께 출력해준다.
 
 #장점
 ------
