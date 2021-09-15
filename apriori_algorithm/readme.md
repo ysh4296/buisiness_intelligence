@@ -1,4 +1,5 @@
-#About A priori algorithm------
+#A priori algorithm 이란?
+------
 
 A priori 알고리즘은 상품들의 조합들을 분석하여 상품들간의 연관성을 분석하고 유의미한 삼품 조합을 구별하는 알고리즘이다.
 
@@ -8,7 +9,7 @@ A priori 알고리즘은 상품들의 조합들을 분석하여 상품들간의 
 
 유의미한 조합인지 아닌지는 각 조합의 support 값을 연산하여 확인할 수 있다.
 
-support
+support :
 
 #알고리즘 적용
 ------
