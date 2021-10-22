@@ -5,8 +5,8 @@
     The BI is consist of three components, data gathering , data storage , knowledge management
     Company deal with many kind of customers  
     and when customers uses the service then customers data remains,
-    plenty amount of structure or unstructured data can be used for develop and   
-    create new strategic business opportunities. And it can helped from big data analysis. 
+    plenty amount of structure or unstructured data can be used for develop  
+    and create new strategic business opportunities. And it can helped from big data analysis. 
     Through such BI, a company can secure a competitive edge in the market   
     and get a long-term advantage with better service for customer.
 
