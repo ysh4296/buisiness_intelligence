@@ -3,66 +3,40 @@
 from Connect import *
 from bs4 import BeautifulSoup
 class Parsing:
-    # 해쉬태그 수집
-    def collectHashTag(self):
-        html_doc = driver.page_source
-        soup = BeautifulSoup(html_doc,'html.parser')
-        hashTag = []
-        for dataKeyWord in soup.find_all('button'):
-            if dataKeyWord.get('data-keyword') is None:
-                continue
-            else:
-                hashTag.append(dataKeyWord.get('data-keyword'))
-        return hashTag
-    #해쉬태그 URL 수집
-    def getLink(self):
-        html_doc = driver.page_source
-        soup = BeautifulSoup(html_doc,'html.parser')
-        rlink = []
-        for link in soup.find_all('a'):
-            try:
-                if link.get('href').find('top_lists/') != -1:
-                    if link.get('href').find('link_key') == -1:
-                        rlink.append(link.get('href'))
-            except AttributeError:
-                continue
-        return rlink
-
-    #맛집 URL 수집
-    def getHotLink(self):
+    # 음식점 URL 수집
+    def get_Rest_Link(self):
         html_doc = driver.page_source
         soup = BeautifulSoup(html_doc, 'html.parser')
-        hotlink = []
-        for link in soup.find_all('a'):
+        link = []
+        for Page_Button in soup.find_all('a',{"class":"only-desktop_not"}):
             try:
-                if link.get('href').find('restaurants') != -1:
-                    if link.get('href').find('restaurant_key') == -1:
-                        hotlink.append(link.get('href'))
+                if Page_Button.get('href').find('restaurants') != -1:
+                    if Page_Button.get('href').find('restaurant_key') == -1:
+                        if Page_Button.get('href') not in link:
+                            link.append(Page_Button.get('href'))
+                            print(str(Page_Button.get('href')))
             except AttributeError:
                 continue
-        return list(set(hotlink))
+        return list(set(link))
 
-    # 맛집 정보 파싱, 전처리
-    def parsingHot(self,url):
-        connect(url)
+    def parsing_Review(self):
+        print("파싱 시작")
         html_doc = driver.page_source
         soup = BeautifulSoup(html_doc, 'html.parser')
         try:
             # 맛집 이름
+            info_list = []
             title = soup.find("h1",{"class":"restaurant_name"})
-            # 맛집 평점
-            rating = soup.find("strong",{"class":"rate-point"})
-            # 맛집 정보
-            info = dict()
-            info['이름'] = title.get_text()
-            info['평점'] = rating.get_text().replace('\n','')
-            table = soup.find("tbody")
-            for thtd in table.find_all("tr"):
-                if thtd.th.get_text() != "메뉴":
-                    temp = thtd.th.get_text().replace(' ' ,'')
-                    info[temp.replace('\n','')] = thtd.td.get_text().replace('\n','')
-                else:
-                    info[thtd.th.get_text()] = thtd.td.get_text()
-            return info
+            print("음식점 이름  " + title.get_text())
+            Review_Item = soup.find_all("a",{"class" : "RestaurantReviewItem__Link"})
+            for Review in Review_Item:
+                info = dict()
+                info['음식점이름'] = title.get_text()
+                info['유저이름'] = Review.find("span",{"class" : "RestaurantReviewItem__UserNickName"}).get_text()
+                info['유저평가'] = Review.find("span",{"class" : "RestaurantReviewItem__RatingText"}).get_text()
+                print(Review.find("span", {"class": "RestaurantReviewItem__UserNickName"}).get_text(), "  ",
+                      Review.find("span", {"class": "RestaurantReviewItem__RatingText"}).get_text())
+                info_list.append(info)
+            return info_list
         except AttributeError:
             print("없음")

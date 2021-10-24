@@ -1,26 +1,26 @@
 #Main.py
 # using utf-8
 
-from Connect import *
+from DBConnect import *
 from ElementControl import *
 from Parsing import *
-from DBConnect import *
 
 if __name__ == "__main__":
-    #해쉬태그를 수집하여 저장
-    collect = []
-
-
-    # 웹 활용 객체
-    driver = Toplist()
-    # 웹 파싱 객체
     p = Parsing()
-
-    #해쉬태그 수집
-    hashTag = driver.collectHashTag()
-
-    #해쉬태그 클릭 후 URL 수집
-    for i in hashTag:
-        driver.tagClick(i)
-        driver.more()
-        collect.append(p.getLink())
+    List = []
+    for i in range(1,11):
+        url = "search/서울?keyword=서울&page=" + i.__str__()
+        connect(url)
+        print(i.__str__() + "  page")
+        List = p.get_Rest_Link()
+        for URL in List:
+            Review_Crawl = Find_Review(URL)
+            Review_Crawl.more()
+            try:
+                info_list = (p.parsing_Review())
+                print("num of review")
+                for info in info_list:
+                    print(type(info))
+                    insertDB(info)
+            except:
+                continue
