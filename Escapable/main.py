@@ -9,6 +9,7 @@ from Parsing import *
 if __name__ == "__main__":
     p = Parsing()
     List = []
+    # Crawling cafe
     """
     Crawler = Find()
     Crawler.click_loc()
@@ -19,6 +20,8 @@ if __name__ == "__main__":
         connect(url)
         info = p.parsing_Cafe()
         insertDBcafe(info)
+    """
+    # Crawling thema
     """
     p = Parsing()
     List = []
@@ -36,7 +39,8 @@ if __name__ == "__main__":
                 insertDBthema(info)
         except:
             continue
-
+    """
+    # Crawling review
     """
    for url in List:
        connect(url)
